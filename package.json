@@ -1,0 +1,13 @@
+{
+  "name": "short_url",
+  "version": "0.1",
+  "main": "dist/index.js",
+  "repository": "https://github.com/bergervi-ynov/short_url.git",
+  "author": "Vincent Berger",
+  "license": "The Unlicense",
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  }
+}
