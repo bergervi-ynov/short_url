@@ -1,12 +1,14 @@
 import URLShortener from './url_shortener';
 
 class URLs {
-    private urls: Map<string, string>;
+    private shortUrls: Map<string, string>;
+    private originalUrls: Map<string, string>;
     private urlShortener: URLShortener;
     private static instance: URLs;
 
     private constructor() {        
-        this.urls = new Map<string,string>();
+        this.shortUrls = new Map<string,string>();
+        this.originalUrls = new Map<string,string>();
         this.urlShortener = new URLShortener();
      }
 
@@ -19,8 +21,21 @@ class URLs {
 
     public addURL(originalURL: string): string {
         const [shortURL, hash] = this.urlShortener.shortenURL(originalURL);
-        this.urls.set(shortURL, hash);
+        this.originalUrls.set(originalURL, hash );
+        this.shortUrls.set(shortURL,hash);
         return shortURL;
+    }
+
+    public getOriginalURL(shortURL: string): string | null {
+        const hash = this.shortUrls.get(shortURL);
+        if (hash) {
+            for (const [originalURL, hashValue] of this.originalUrls) {
+                if (hashValue === hash) {
+                    return originalURL;
+                }
+            }
+        }
+        return null;
     }
 
 }
