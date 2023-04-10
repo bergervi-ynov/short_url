@@ -2,10 +2,21 @@
     "compilerOptions": {
       "target": "es6",
       "module": "commonjs",
-      "outDir": "dist",
-      "sourceMap": true
+      "outDir": "./dist",
+      "sourceMap": true,
+      "rootDir": "./lib",
+      "types": ["node", "jest"],
+      "allowJs": true,    
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,    
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules"]
+    "include": ["lib/**/*"],
+    "exclude": ["node_modules", "dist"]
   }
   
