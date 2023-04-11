@@ -2,13 +2,13 @@ import ShortUrl from './short_url';
 import URLShortenerService from './url_shortener_service';
 
 class ShortUrlsDatabase {
-    private Urls: Array<ShortUrl>;
-    private urlShortener: URLShortenerService;
+    private ShortUrls: Array<ShortUrl>;
+    private urlShortenerService: URLShortenerService;
     private static instance: ShortUrlsDatabase;
 
     private constructor() {        
-        this.Urls = new Array<ShortUrl>();
-        this.urlShortener = new URLShortenerService();
+        this.ShortUrls = new Array<ShortUrl>();
+        this.urlShortenerService = new URLShortenerService();
      }
 
     public static getInstance(): ShortUrlsDatabase {
@@ -19,13 +19,13 @@ class ShortUrlsDatabase {
     }   
 
     public addURL(originalURL: string): string {
-        const url : ShortUrl = this.urlShortener.shortenURL(originalURL);
-        this.Urls.push(url);
+        const url : ShortUrl = this.urlShortenerService.shortenURL(originalURL);
+        this.ShortUrls.push(url);
         return url.getShortURL();
     }
 
     public getOriginalURL(shortURL: string): string | null {
-        const url = this.Urls.find(url => url.getShortURL() === shortURL);
+        const url = this.ShortUrls.find(url => url.getShortURL() === shortURL);
         // If the URL is found and is less than 24 hours old, return the original URL
         if (url && url.getTimestamp() + 1000 * 60 * 60 * 24 > Date.now()) {
             return url.getOriginalURL();
